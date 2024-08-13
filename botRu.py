@@ -5,18 +5,26 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-user = (input("\nUsuário: "))
-senha = (input("\nSenha: "))
+#user = (input("\nUsuário: "))
+#senha = (input("\nSenha: "))
+
+user = "04004382084"
+senha = "Whatsapp2atualizad@"
+
+#user = "03607649081"
+#senha = "Ovoemtob0m"
 
 data = int(input("\nDeseja agendar apartir de que dia dessa semana?: "))
 data = str(data)
+
+moradia = False
 
 servico = Service(ChromeDriverManager().install())
 navegador = webdriver.Chrome(service=servico)
 
 cont = 1
 navegador.get(
-    "https://ru.fw.iffarroupilha.edu.br/auth/realms/iffar/protocol/openid-connect/auth?response_type=code&client_id=sifw&redirect_uri=https%3A%2F%2Fru.fw.iffarroupilha.edu.br%2Fsifw%2F&state=3420e1b2-0424-4d85-ac7b-9b55fedb1a03&scope=openid"
+    "https://ru.fw.iffarroupilha.edu.br/"
     )
 #sleep(1)
 
@@ -36,6 +44,18 @@ while home:
 
 navegador.find_element('xpath','//*[@id="frmHeader"]/div[1]').click()
 navegador.find_element(By.XPATH,'//*[@id="j_idt30:j_idt31_j_idt32"]/ul/li[1]/a').click()
+sleep(.2)
+try:
+    navegador.find_element(By.PARTIAL_LINK_TEXT,'Café da manhã, R$ 0.0, Moradia Estudantil')
+    moradia = True
+except:
+    moradia = False
+
+if(moradia):
+    print("É da moradia")
+else:
+    print("Não é da moradia")
+quit()
 for i in range(5):
     navegador.find_element(By.PARTIAL_LINK_TEXT,data).click()
     sleep(.2)
@@ -53,7 +73,7 @@ for i in range(5):
         except NoSuchElementException:
             print("Não tem")
             sleep(.1)
-
+    
     navegador.find_element(By.XPATH,'//*[@id="frmMain:j_idt79"]/span').click()
     data = int(data) + cont
     data = str(data)
