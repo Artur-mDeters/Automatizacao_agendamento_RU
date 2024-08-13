@@ -5,14 +5,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-#user = (input("\nUsuário: "))
-#senha = (input("\nSenha: "))
+user = (input("\nUsuário: "))
+senha = (input("\nSenha: "))
 
-user = "04004382084"
-senha = "Whatsapp2atualizad@"
-
-#user = "03607649081"
-#senha = "Ovoemtob0m"
 
 data = int(input("\nDeseja agendar apartir de que dia dessa semana?: "))
 data = str(data)
