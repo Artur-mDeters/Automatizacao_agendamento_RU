@@ -12,8 +12,6 @@ senha = (input("\nSenha: "))
 data = int(input("\nDeseja agendar apartir de que dia dessa semana?: "))
 data = str(data)
 
-moradia = False
-
 servico = Service(ChromeDriverManager().install())
 navegador = webdriver.Chrome(service=servico)
 
@@ -40,17 +38,7 @@ while home:
 navegador.find_element('xpath','//*[@id="frmHeader"]/div[1]').click()
 navegador.find_element(By.XPATH,'//*[@id="j_idt30:j_idt31_j_idt32"]/ul/li[1]/a').click()
 sleep(.2)
-try:
-    navegador.find_element(By.PARTIAL_LINK_TEXT,'Café da manhã, R$ 0.0, Moradia Estudantil')
-    moradia = True
-except:
-    moradia = False
 
-if(moradia):
-    print("É da moradia")
-else:
-    print("Não é da moradia")
-quit()
 for i in range(5):
     navegador.find_element(By.PARTIAL_LINK_TEXT,data).click()
     sleep(.2)
@@ -66,14 +54,11 @@ for i in range(5):
             navegador.find_element(By.XPATH,'//*[@id="frmMain:j_idt79"]/span')
             confirm = False
         except NoSuchElementException:
-            print("Não tem")
             sleep(.1)
     
     navegador.find_element(By.XPATH,'//*[@id="frmMain:j_idt79"]/span').click()
     data = int(data) + cont
     data = str(data)
-#navegador.find_element(By.LINK_TEXT,'Salvar').click()
-
 sleep(2)
 print("\n---------------------------- Tudo pronto Parça------------------------")
 print("""
